@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f0f5184-731e-4e5f-9c5d-02c120500686" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookdemo/bookdemo/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookdemo/bookdemo/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookdemo/booktest/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookdemo/booktest/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookdemo/booktest/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookdemo/booktest/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookdemo/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/bookdemo/db.sqlite3" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,20 +14,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/django1.1.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bookdemo/booktest/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
-              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="277">
+              <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/bookdemo/booktest/models.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bookdemo/booktest/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="12" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="156">
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -51,6 +54,7 @@
         <option value="$PROJECT_DIR$/boohdemo/boohdemo/__init__.py" />
         <option value="$PROJECT_DIR$/django1.1.py" />
         <option value="$PROJECT_DIR$/bookdemo/bookdemo/settings.py" />
+        <option value="$PROJECT_DIR$/bookdemo/booktest/admin.py" />
         <option value="$PROJECT_DIR$/bookdemo/booktest/models.py" />
       </list>
     </option>
@@ -91,6 +95,13 @@
               <item name="demo1" type="462c0819:PsiDirectoryNode" />
               <item name="bookdemo" type="462c0819:PsiDirectoryNode" />
               <item name="booktest" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="demo1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="demo1" type="462c0819:PsiDirectoryNode" />
+              <item name="bookdemo" type="462c0819:PsiDirectoryNode" />
+              <item name="booktest" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -202,13 +213,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/django1.1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bookdemo/bookdemo/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -219,10 +223,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/bookdemo/booktest/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django1.1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bookdemo/booktest/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        <state relative-caret-position="277">
+          <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
         </state>
       </provider>
     </entry>
