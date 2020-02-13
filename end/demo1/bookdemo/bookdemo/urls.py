@@ -14,8 +14,33 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+# 路由 网址 每一个网址均需要绑定一个视图函数
+# MVT V视图函数  3个作用 接受请求 处理数据 返回响应
+
+# from django.http import HttpResponse
+#
+#
+# def index(request):
+#     return HttpResponse("这里是首页")
+#
+#
+# def list(request):
+#     return HttpResponse("这里是列表页")
+#
+#
+# def jsondata(request):
+#     return HttpResponse("{'name':'wjw','age':'23'}")
+
 
 urlpatterns = [
+    # 将路由（例 admin）与视图函数绑定
     path('admin/', admin.site.urls),
+
+    # 1、使用path将booktest中的urls.py路由文件导入绑定
+    path('booktest/', include('booktest.urls'))
+    # path('index/', index),
+    # path('list/', list),
+    # path('json/', jsondata),
 ]
