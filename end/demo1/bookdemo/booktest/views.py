@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.template import loader
 from .models import Book, Hero
 
@@ -42,6 +42,15 @@ def deletebook(request, bookid):
     # return HttpResponse("删除成功")
     # 数据交互后返回原页
     # return HttpResponseRedirect(redirect_to='/')
-    return redirect(to='/')
+    url = reverse("booktest:index")
+    return redirect(to=url)
 
+
+def deletehero(request, heroid):
+    hero = Hero.objects.get(id=heroid)
+    bookid = hero.book.id
+    hero.delete()
+
+    url = reverse("booktest:detail",args=(bookid,))
+    return redirect(to=url)
 # 使用 djang 模板
