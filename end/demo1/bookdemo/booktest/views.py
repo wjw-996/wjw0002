@@ -53,4 +53,18 @@ def deletehero(request, heroid):
 
     url = reverse("booktest:detail",args=(bookid,))
     return redirect(to=url)
+
+
+def addhero(request,bookid):
+    if request.method == 'GET':
+        return render(request,'addhero.html')
+    elif request.method == 'POST':
+        hero = Hero()
+        hero.name = request.POST.get("name")
+        hero.gender = request.POST.get("gender")
+        hero.content = request.POST.get("content")
+        hero.book = Book.objects.get(id=bookid)
+        hero.save()
+        url = reverse("booktest:detail",args=(bookid,))
+        return redirect(to=url)
 # 使用 djang 模板

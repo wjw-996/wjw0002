@@ -11,11 +11,15 @@
         <h2>{{book.title}}</h2>
         <ul>
             {% for hero in book.hero_set.all %}
-                <li>{{hero.id}} -- {{hero.name}} -- {{hero.gender}} -- {{hero.content}} <a href="{% url 'booktest:deletehero' heroid %}"><button>删除</button></a></li>
+                <li>{{hero.id}} -- {{hero.name}} -- {{hero.gender}} -- {{hero.content}} <a href="{% url 'booktest:deletehero' hero.id %}"><button>删除</button></a></li>
             {% endfor %}
         </ul>
     </div>
 <!--    <a href="/">返回列表页</a>-->
+    <div>
+        <a href="{% url 'booktest:addhero' book.id %}"><button>添加英雄</button></a>
+    </div>
+
     <a href="{% url 'booktest:index' %}">返回列表页</a>
 </body>
 </html>
