@@ -39,7 +39,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # 1、使用path将booktest中的urls.py路由文件导入绑定
-    path('', include('booktest.urls',namespace='booktest'))
+    path('', include('booktest.urls', namespace='booktest'))
     # path('index/', index),
     # path('list/', list),
     # path('json/', jsondata),

@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template import loader
 from .models import Book, Hero
+
 # Create your views here.
 # 3、编写需要的视图函数
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 
 def index(request):
@@ -33,5 +34,14 @@ def detail(request, bookid):
     # result = template.render(context)
     # return HttpResponse(result)
     return render(request, 'detail.html', {'book': book})
+
+
+def deletebook(request, bookid):
+    book = Book.objects.get(id=bookid)
+    book.delete()
+    # return HttpResponse("删除成功")
+    # 数据交互后返回原页
+    # return HttpResponseRedirect(redirect_to='/')
+    return redirect(to='/')
 
 # 使用 djang 模板

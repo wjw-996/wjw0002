@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^about/$', views.about, name='about'),
     # 使用正则分组可以向视图传递参数
-    url(r'detail/(\d+)/$', views.detail, name='detail')
+    url(r'detail/(\d+)/$', views.detail, name='detail'),
+    url(r'^deletebook/(\d+)/$', views.deletebook, name='deletebook')
 ]
