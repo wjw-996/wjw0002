@@ -51,13 +51,13 @@ def deletehero(request, heroid):
     bookid = hero.book.id
     hero.delete()
 
-    url = reverse("booktest:detail",args=(bookid,))
+    url = reverse("booktest:detail", args=(bookid,))
     return redirect(to=url)
 
 
-def addhero(request,bookid):
+def addhero(request, bookid):
     if request.method == 'GET':
-        return render(request,'addhero.html')
+        return render(request, 'addhero.html')
     elif request.method == 'POST':
         hero = Hero()
         hero.name = request.POST.get("name")
@@ -65,6 +65,45 @@ def addhero(request,bookid):
         hero.content = request.POST.get("content")
         hero.book = Book.objects.get(id=bookid)
         hero.save()
-        url = reverse("booktest:detail",args=(bookid,))
+        url = reverse("booktest:detail", args=(bookid,))
+        return redirect(to=url)
+
+
+def edithero(request, heroid):
+    hero = Hero.objects.get(id=heroid)
+    if request.method == 'GET':
+        return render(request, 'edithero.html', {"hero": hero})
+    elif request.method == 'POST':
+        hero.name = request.POST.get("name")
+        hero.gender = request.POST.get("gender")
+        hero.content = request.POST.get("content")
+        hero.save()
+        url = reverse("booktest:detail", args=(hero.book.id,))
+        return redirect(to=url)
+
+
+def addbook(request):
+    if request.method == 'GET':
+        return render(request, 'addbook.html')
+    elif request.method == 'POST':
+        book = Book()
+        book.title = request.POST.get("title")
+        book.price = request.POST.get("price")
+        book.pub_date = request.POST.get("pub_date")
+        book.save()
+        url = reverse("booktest:index")
+        return redirect(to=url)
+
+
+def editbook(request, bookid):
+    book = Book.objects.get(id=bookid)
+    if request.method == 'GET':
+        return render(request, 'editbook.html', {"book": book})
+    elif request.method == 'POST':
+        book.title = request.POST.get("title")
+        book.price = request.POST.get("price")
+        book.pub_date = request.POST.get("pub_date")
+        book.save()
+        url = reverse("booktest:index")
         return redirect(to=url)
 # 使用 djang 模板
