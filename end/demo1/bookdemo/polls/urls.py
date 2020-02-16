@@ -7,5 +7,7 @@ app_name = "polls"
 
 # 2、将路由与视图函数绑定
 urlpatterns = [
-    # url(r'^about/$', views.about, name='about'),
+    url(r'polls/$', views.polls, name='polls'),
+    url(r'^details/(\d+)/$', views.details, name='details'),
+    url(r'^result/(\d+)/$', views.result, name='result'),
 ]
