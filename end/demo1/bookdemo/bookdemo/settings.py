@@ -22,9 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '7f6y(375egswi0_b^)3$8vb^o-g2cf@gz%65!r36u*i^hd8s&5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+DEBUG = True
+# 如果BEBUG设置成了False，则 ALLOWED_HOSTS 必须写内容
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -43,12 +44,13 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# 根配置 由于指明
 ROOT_URLCONF = 'bookdemo.urls'
 
 TEMPLATES = [
@@ -116,4 +118,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+
+#
+AUTH_USER_MODEL = 'polls.User'
+

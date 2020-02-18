@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>投票信息汇总</title>
-    <link rel="stylesheet" href="/static/css/polls.css">
-</head>
-<body>
-    <div class="title">
-        <h1>投票信息汇总</h1>
+{% extends 'base.html' %}
+
+{% block body %}
+     <h1>投票信息汇总</h1>
         <h4>请选择你所感兴趣的进行投票</h4><br>
         <div>
             <ul>
@@ -16,6 +10,4 @@
                 {% endfor %}
             </ul>
         </div>
-    </div>
-</body>
-</html>
+{% endblock %}

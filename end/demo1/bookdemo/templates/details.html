@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>投票详情</title>
-    <link rel="stylesheet" href="/static/css/polls.css">
-</head>
-<body>
-    <div class="title">
+{% extends 'base.html' %}
+
+{% block body %}
         <h1>问题详情：{{headline.title}}</h1>
         <h3>投票选项：</h3><br>
         <form action="{% url 'polls:result' headline.id %}" method="post">
+            {% csrf_token %}
             <ul>
                 {% for option in headline.option_set.all %}
                 <li><input type="radio" value="{{option.id}}" name="content" checked>{{option.content}}</li><br>
@@ -18,6 +13,4 @@
             </ul>
         </form>
         <p><a href="{% url 'polls:polls' %}"><button>返回投票列表</button></a></p>
-    </div>
-</body>
-</html>
+{% endblock %}

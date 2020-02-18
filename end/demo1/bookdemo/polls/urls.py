@@ -7,7 +7,13 @@ app_name = "polls"
 
 # 2、将路由与视图函数绑定
 urlpatterns = [
-    url(r'^$', views.polls, name='polls'),
-    url(r'^details/(\d+)/$', views.details, name='details'),
-    url(r'^result/(\d+)/$', views.result, name='result'),
+    # url(r'^$', views.polls, name='polls'),
+    url(r'^$', views.HeadlineView.as_view(), name='polls'),
+
+    # url(r'^details/(\d+)/$', views.details, name='details'),
+    url(r'^details/(\d+)/$', views.DetailsView.as_view(), name='details'),
+
+    # url(r'^result/(\d+)/$', views.result, name='result'),
+    url(r'^result/(\d+)/$', views.ResultView.as_view(), name='result'),
+
 ]

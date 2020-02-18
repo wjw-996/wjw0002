@@ -10,7 +10,7 @@ urlpatterns = [
     # url(r'^index/$', views.index),
     url(r'^$', views.index, name='index'),
     url(r'^about/$', views.about, name='about'),
-    # 使用正则分组可以向视图传递参数
+    # 使用正则分组可以向视图传递参数 同时视图函数中必须有相对应的参数 如：views中方法接受的 bookid 等
     url(r'detail/(\d+)/$', views.detail, name='detail'),
     url(r'^deletebook/(\d+)/$', views.deletebook, name='deletebook'),
     url(r'^deletehero/(\d+)/$', views.deletehero, name='deletehero'),
