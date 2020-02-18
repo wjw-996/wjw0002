@@ -6,19 +6,32 @@
     <link rel="stylesheet" href="/static/css/polls.css">
 </head>
 <body>
-    <div class="title">
+<div class="title">
 
-        {% block header %}
-        这里是头部
-        {% endblock %}
-
-        {% block body %}
-        这里是身体
-        {% endblock %}
-
-        {% block forter %}
-        这里是底部
-        {% endblock %}
+    {% block header %}
+    <div>
+        {% if request.user and request.user.username != '' %}
+        用户名：{{request.user.username}}<a href="{% url 'polls:logout' %}">
+        <button>退出</button>
+    </a>
+        {% else %}
+        <a href="{% url 'polls:login' %}">
+            登录
+        </a>
+        <a href="{% url 'polls:registers' %}">
+            注册
+        </a>
+        {% endif %}
     </div>
+    {% endblock %}
+
+    {% block body %}
+    这里是身体
+    {% endblock %}
+
+    {% block forter %}
+    这里是底部
+    {% endblock %}
+</div>
 </body>
 </html>

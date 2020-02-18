@@ -7,6 +7,7 @@
 <body>
     <div class="title">
         <form action="#" method="post">
+            {% csrf_token %}
              <p>书籍名字：<input type="text" name="title"  value="{{book.title}}" ></p><br>
              <p>出版时间：<input type="date" name="pub_date" value="{{book.pub_date}}"></p><br>
              <p>出售价格：<input type="number" max="9999.0" min="0.0" step="0.5" name="price" value="{{book.price}}"></p><br>

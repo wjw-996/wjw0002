@@ -1,0 +1,12 @@
+{% block body %}
+     <h1>注册</h1>
+        <div>
+            <form action="{% url 'polls:registers' %}" method="post">
+                {% csrf_token %}
+                用户名：<input type="text" name="username" placeholder="请输入用户名"><br>
+                密码：<input type="text" name="password" placeholder="请输入密码"><br>
+                重复密码：<input type="text" name="password2" placeholder="请再次输入密码"><br>
+                <input type="submit" value="注册">
+            </form>
+        </div>
+{% endblock %}

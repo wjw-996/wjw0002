@@ -16,5 +16,10 @@ class HeadlineAdmin(admin.ModelAdmin):
     inlines = [OptionInline]
 
 
+class UserAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(Headline, HeadlineAdmin)
 admin.site.register(Option, OptionAdmin)
+admin.site.register(User, UserAdmin)
