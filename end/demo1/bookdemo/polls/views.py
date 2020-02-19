@@ -3,6 +3,7 @@ from .models import Headline, Option, User
 from django.views.generic import View, TemplateView, ListView, CreateView, DetailView, DeleteView, UpdateView
 from django.contrib.auth import authenticate, login as lin, logout as lot
 from django.http import HttpResponse, HttpResponseRedirect
+from .forms import *
 
 
 # Create your views here.
@@ -40,8 +41,9 @@ def details(request, headlineid):
             # 没投过票就是用render发起一次请求
             return render(request, "details.html", {'headline': headline})
     else:
-        url = reverse("polls:login") + "?next=/polls/details/" + headlineid + "/"
+        url = reverse("polls:login") + "?next=" + reverse("polls:details", args=(headlineid,))
         return redirect(to=url)
+
 
 # class DetailsView(View):
 
@@ -80,23 +82,29 @@ def result(request, headlineid):
 
 def login(request):
     if request.method == 'GET':
-        return render(request, 'login.html')
+        lf = LonginForm()
+        return render(request, 'login.html', {"lf": lf})
     elif request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
-        if user:
-            lin(request, user)
-            next = request.GET.get("next")
-            print(next)
-            if next:
-                url = next
+        lf = LonginForm(request.POST)
+        if lf.is_valid():
+            username = lf.cleaned_data["username"]
+            password = lf.cleaned_data["password"]
+            # username = request.POST.get('username')
+            # password = request.POST.get('password')
+            user = authenticate(username=username, password=password)
+            if user:
+                lin(request, user)
+                next = request.GET.get("next")
+                print(next)
+                if next:
+                    url = next
+                else:
+                    url = reverse("polls:polls")
+                return redirect(to=url)
             else:
-                url = reverse("polls:polls")
-            return redirect(to=url)
+                return render(request, 'login.html', {'err': '用户名或密码错误'})
         else:
-            url = reverse("polls:login")
-            return redirect(to=url)
+            return HttpResponse("失败")
 
 
 def registers(request):
@@ -107,14 +115,14 @@ def registers(request):
         password = request.POST.get("password")
         password2 = request.POST.get("password2")
         if User.objects.filter(username=username).count() > 0:
-            return HttpResponse("用户名已存在")
+            return render(request, 'registers.html', {'err': '用户名已存在'})
         else:
             if password == password2:
                 User.objects.create_user(username=username, password=password)
                 url = reverse("polls:login")
                 return redirect(to=url)
             else:
-                return HttpResponse("密码不一致")
+                return render(request, 'registers.html', {'err': '两次密码不一致'})
 
 
 def logout(request):

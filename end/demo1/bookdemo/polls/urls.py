@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^$', views.polls, name='polls'),
 
     # url(r'^details/(\d+)/$', views.details, name='details'),
-    url(r'^details/(\d+)/$', views.details, name='details'),
+    url(r'^details/(?P<headlineid>\d+)/$', views.details, name='details'),
 
     # url(r'^result/(\d+)/$', views.result, name='result'),
     url(r'^result/(\d+)/$', views.result, name='result'),

@@ -1,11 +1,23 @@
 {% block body %}
      <h1>登录</h1>
+        {% comment %}
         <div>
             <form action="{% url 'polls:login' %}" method="post">
                 {% csrf_token %}
                 用户名：<input type="text" name="username" placeholder="请输入用户名"><br>
-                密码：<input type="text" name="password" placeholder="请输入用户名"><br>
+                密码：<input type="password" name="password" placeholder="请输入用户名"><br>
+                {{err}}
                 <input type="submit" value="登录">
             </form>
         </div>
+        {% endcomment %}
+        <form action="{% url 'polls:login' %}" method="post">
+            {% csrf_token %}
+            {# {{lf}} #}
+            {{lf.username.label}} ：{{lf.username}}<br>
+            {{lf.username.help_text}}<br>
+            {{lf.password.label}} ：{{lf.password}}<br>
+            {{lf.password.help_text}}<br>
+            <input type="submit" value="登录">
+        </form>
 {% endblock %}
