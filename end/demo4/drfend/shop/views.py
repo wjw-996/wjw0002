@@ -16,6 +16,7 @@ from rest_framework import generics
 from rest_framework import mixins
 
 from rest_framework import permissions
+from . import permissions
 from rest_framework import filters
 
 
@@ -179,9 +180,19 @@ class CategoryViewSets(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     # 1通过属性指明
     serializer_class = CategorySerizlizer
+
     # 2通过方法指明
     # def get_serializer_class(self):
     #     return CategorySerizlizer
+
+    # 权限配置，若用户未登录则不显示分类列表
+    # permission_classes = [permissions.IsAdminUser]
+
+    # 设置权限 超级用户可以对分类列表进行操作，普通用户仅能观看列表
+    def get_permissions(self):
+        if self.action == "create" or self.action == "update" or self.action == "partial_update" or self.action == "destroy":
+            return [permissions.IsAdminUser()]
+        return []
 
 
 class GoodViewSets(viewsets.ModelViewSet):
@@ -196,17 +207,24 @@ class GoodImgsViewSets(viewsets.ModelViewSet):
     serializer_class = GoodImgsSerializer
 
 
-class UserViewSets(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
+class UserViewSets(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.CreateModelMixin, mixins.UpdateModelMixin,
                    mixins.DestroyModelMixin):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
 
-    @action(methods=['POST'], detail=False)
-    def regist(self, request):
-        seria = UserRegistSerializer(data=request.data)
-        seria.is_valid(raise_exception=True)
-        seria.save()
-        return Response(seria.data, status=status.HTTP_201_CREATED)
+    # serializer_class = UserSerializer
+    def get_serializer_class(self):
+        print("aaaa", self.action)
+        if self.action == "create":
+            return UserRegistSerializer
+        return UserSerializer
+
+    # 下方代码可以使用 def get_serializer_class(self) 完成
+    # @action(methods=['POST'], detail=False)
+    # def regist(self, request):
+    #     seria = UserRegistSerializer(data=request.data)
+    #     seria.is_valid(raise_exception=True)
+    #     seria.save()
+    #     return Response(seria.data, status=status.HTTP_201_CREATED)
 
 
 class OrderViewSets(viewsets.ModelViewSet):

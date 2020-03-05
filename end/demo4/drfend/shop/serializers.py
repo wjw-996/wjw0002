@@ -180,7 +180,8 @@ class UserSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
         from django.contrib.auth import hashers
-        attrs["password"] = hashers.make_password(attrs["password"])
+        if attrs.get("password"):
+            attrs["password"] = hashers.make_password(attrs["password"])
         return attrs
 
 

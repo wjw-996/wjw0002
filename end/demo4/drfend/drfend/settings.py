@@ -127,6 +127,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 MEDIAFIELS_DIRS = [os.path.join(BASE_DIR,'media')]
 
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.AutoSchema',
+
+    # 默认的权限配置
+    'DEFAULT_PERMISSION_CLASSES': [
+            'rest_framework.permissions.AllowAny',
+        ],
+}
+
 
 # 应用名 模型名  推荐在没有数据库的前提 去配置
 AUTH_USER_MODEL = 'shop.User'
