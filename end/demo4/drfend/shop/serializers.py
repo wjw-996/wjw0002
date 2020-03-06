@@ -208,47 +208,7 @@ class UserRegistSerializer(serializers.Serializer):
                                         password=validated_data.get("password"))
 
 
-class OrderSerializer(serializers.Serializer):
-    name = serializers.CharField(max_length=20, min_length=2, error_messages={
-        "max_length": "最多20个字",
-        "min_length": "最少2个字"
-    })
-    category = CategorySerizlizer(label="分类")
-    imgs = GoodImgsSerializer(label="图片", many=True, read_only=True)
-
-    def validate_category(self, category):
-        """
-        处理category
-        :param category:  处理的原始值
-        :return: 返回新值
-        """
-        print("category原始值为", category)
-        try:
-            Category.objects.get(name=category["name"])
-        except:
-            raise serializers.ValidationError("输入的分类名不存在")
-
-        return category
-
-    def validate(self, attrs):
-        print("收到的数据为", attrs)
-        try:
-            c = Category.objects.get(name=attrs["category"]["name"])
-        except:
-            c = Category.objects.create(name=attrs["category"]["name"])
-        attrs["category"] = c
-        print("更改之后的数据", attrs)
-
-        return attrs
-
-    def create(self, validated_data):
-        print("创建good参数", validated_data)
-        instance = Good.objects.create(**validated_data)  # name=    category=
-        return instance
-
-    def update(self, instance, validated_data):
-        print("原始值", instance.name, instance.category)
-        instance.name = validated_data.get("name", instance.name)
-        instance.category = validated_data.get("category", instance.category)
-        instance.save()
-        return instance
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = "__all__"

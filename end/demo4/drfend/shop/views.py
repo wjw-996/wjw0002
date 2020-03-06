@@ -16,7 +16,7 @@ from rest_framework import generics
 from rest_framework import mixins
 
 from rest_framework import permissions
-from . import permissions
+from . import permissions as mypermissions
 from rest_framework import filters
 
 
@@ -192,7 +192,7 @@ class CategoryViewSets(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action == "create" or self.action == "update" or self.action == "partial_update" or self.action == "destroy":
             return [permissions.IsAdminUser()]
-        return []
+        return [permissions.IsAuthenticated()]
 
 
 class GoodViewSets(viewsets.ModelViewSet):
@@ -230,6 +230,14 @@ class UserViewSets(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.Cr
 class OrderViewSets(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+
+    def get_permissions(self):
+        if self.action == "create":
+            return [permissions.IsAuthenticated()]
+        elif self.action == "update" or self.action == "partial_update" or self.action == "retrieve" or self.action == "destroy":
+            return [mypermissions.OrderPermission()]
+        else:
+            return [permissions.IsAdminUser()]
 
 # http方法                          混合类关键字                   action关键字
 # GET列表                           List                          get

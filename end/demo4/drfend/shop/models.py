@@ -36,3 +36,7 @@ class User(AbstractUser):
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="所属用户", )
     goods = models.ManyToManyField(Good, verbose_name="订阅书籍")
+
+    def __str__(self):
+        return self.user.username + "的订单"
+

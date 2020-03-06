@@ -19,6 +19,7 @@ from django.conf.urls import url
 from django.views.static import serve
 from .settings import MEDIA_ROOT
 from shop.views import *
+from rest_framework_simplejwt.views import token_obtain_pair, token_refresh
 
 # 引入API文档路由
 from rest_framework.documentation import include_docs_urls
@@ -54,6 +55,9 @@ urlpatterns = [
 
     # url(r'^categorys/$',CategoryViewSets2.as_view({'get':'list','post':'create'})),
     # url(r'^categorys/(?P<pk>\d+)/$',CategoryViewSets2.as_view({'get':'retrieve','put':'update','patch':'update','delete':'destroy'})),
+
+    url(r'^login1/$', token_obtain_pair, name="login"),
+    url(r'^refresh/$', token_refresh, name="refresh"),
 
     # API文档地址
     path('api/v1/docs/', include_docs_urls(title="RestFulAPI", description="RestFulAPI v1")),

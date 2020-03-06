@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = 'hxx$%_0s^aw^ce3==fcl1bn^t3$b^c!9!o$thln3!vmh7+ioii'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -71,7 +69,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'drfend.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -81,7 +78,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -101,7 +97,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -115,7 +110,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
@@ -123,25 +117,30 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-MEDIAFIELS_DIRS = [os.path.join(BASE_DIR,'media')]
+MEDIAFIELS_DIRS = [os.path.join(BASE_DIR, 'media')]
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.AutoSchema',
 
     # 默认的权限配置
     'DEFAULT_PERMISSION_CLASSES': [
-            'rest_framework.permissions.AllowAny',
-        ],
-}
+        'rest_framework.permissions.AllowAny',
+    ],
 
+    # 全局认证，优先级高于视图类中的配置
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+
+        # 首先默认先试用 session 认证
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 若 session 未通过，则使用basic认证，及用户名密码
+        # 'rest_framework.authentication.BasicAuthentication'
+    ],
+}
 
 # 应用名 模型名  推荐在没有数据库的前提 去配置
 AUTH_USER_MODEL = 'shop.User'
 
-
-
-
-
-
+AUTHENTICATION_BACKENDS = ('shop.authbackend.MyLoginBackend',)
