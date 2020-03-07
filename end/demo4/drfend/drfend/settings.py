@@ -37,9 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop',
     'rest_framework',
+    'django_filters',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -134,13 +137,31 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
 
         # 首先默认先试用 session 认证
-        # 'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
         # 若 session 未通过，则使用basic认证，及用户名密码
-        # 'rest_framework.authentication.BasicAuthentication'
+        'rest_framework.authentication.BasicAuthentication'
     ],
+
+
+    # 配置频次限制参数，DRF自带有频次限制类，此处写的为全局参数，可像权限自定义所需要的类，可设置视图级配置
+    # 'DEFAULT_THROTTLE_CLASSES': ['rest_framework.throttling.AnonRateThrottle',
+    #                              'rest_framework.throttling.UserRateThrottle'],
+    # 'DEFAULT_THROTTLE_RATES': {
+    #     'user': '1000/day',
+    #     'anon': '20/day',
+    # },
+
+    # DRF自带有分页配置类，基于Django分页类进行深次封装，可自定义，可视图级
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'PAGE_SIZE': 2,
+
+    # 全局过滤
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 
 # 应用名 模型名  推荐在没有数据库的前提 去配置
 AUTH_USER_MODEL = 'shop.User'
 
 AUTHENTICATION_BACKENDS = ('shop.authbackend.MyLoginBackend',)
+
+CORS_ORIGIN_ALLOW_ALL = True

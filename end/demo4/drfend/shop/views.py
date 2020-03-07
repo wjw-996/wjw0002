@@ -15,9 +15,16 @@ from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework import mixins
 
+# 引入自定义分页类
+from .pagination import MyPagination
 from rest_framework import permissions
+# 引入自定义权限类
 from . import permissions as mypermissions
+# 引入自定义频次类
+from .throttling import MyAnon, MyUser
+# 引入django过滤类
 from rest_framework import filters
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class CategoryListView2(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
@@ -192,7 +199,17 @@ class CategoryViewSets(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action == "create" or self.action == "update" or self.action == "partial_update" or self.action == "destroy":
             return [permissions.IsAdminUser()]
-        return [permissions.IsAuthenticated()]
+        else:
+            return []
+
+    # pagination_class = MyPagination
+
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ["name"]
+    search_fields = ["name"]
+    ordering_fields = ["id"]
+
+    # throttle_classes = [MyAnon, MyUser]
 
 
 class GoodViewSets(viewsets.ModelViewSet):
