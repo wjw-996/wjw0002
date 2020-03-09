@@ -198,6 +198,7 @@ class UserRegistSerializer(serializers.Serializer):
 
     def validate_password2(self, data):
         print("+++", data, "____")
+        print("---", self.initial_data, "____")
         if data != self.initial_data["password"]:
             raise serializers.ValidationError("重复密码不一致！")
         else:
