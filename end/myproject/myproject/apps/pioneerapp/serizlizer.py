@@ -62,7 +62,7 @@ class ThematicTypeSerizlizer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class AuthorSerizlizer(serializers.Serializer):
+class AuthorSerizlizer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = "__all__"
